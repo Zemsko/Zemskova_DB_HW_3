@@ -87,8 +87,8 @@ ORDER BY  c.customer_id DESC, sum(t.list_price) DESC, max(t.list_price), min(t.l
 SELECT c.customer_id,
 	sum(t.list_price)OVER (PARTITION BY c.customer_id) AS sum_transaction ,
 	max(t.list_price)OVER (PARTITION BY c.customer_id) AS max_transaction,
-	min(t.list_price)OVER (PARTITION BY c.customer_id) AS min_transaction
-
+	min(t.list_price)OVER (PARTITION BY c.customer_id) AS min_transaction,
+        count(t.list_price)OVER(PARTITION BY c.customer_id) AS count_transaction
 FROM "transaction"  AS t
 JOIN customer AS c ON t.customer_id = c.customer_id;
 
