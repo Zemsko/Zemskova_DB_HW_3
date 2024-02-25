@@ -51,14 +51,14 @@ ORDER BY count DESC ;
 /*2.Найти сумму транзакций за каждый месяц по сферам деятельности,
 отсортировав по месяцам и по сфере деятельности.*/ 
 
-with combined_cte as (
- select date_trunc('month', t.transaction_date) as year_and_month, t.standard_cost, c.job_industry_category
- from "transaction" AS t 
- join customer AS c on t.customer_id = c.customer_id 
+WITH combined_cte as (
+ SELECT date_trunc('month', t.transaction_date) as year_and_month, t.standard_cost, c.job_industry_category
+ FROM "transaction" AS t 
+ JOIN customer AS c on t.customer_id = c.customer_id 
 )
-select cte.year_and_month, cte.job_industry_category, sum(cte.standard_cost) from combined_cte cte
-group by cte.year_and_month, job_industry_category
-order by cte.year_and_month, job_industry_category;
+SELECT cte.year_and_month, cte.job_industry_category, sum(cte.standard_cost) from combined_cte cte
+GROUP BY cte.year_and_month, job_industry_category
+ORDER BY cte.year_and_month, job_industry_category;
 
 
 /*3.Вывести количество онлайн-заказов для всех брендов в рамках подтвержденных заказов клиентов из сферы IT*/
@@ -156,7 +156,7 @@ WITH transaction_tab AS (
         c.last_name,
         c.job_title,
         
-       lag(t.transaction_date) OVER (PARTITION BY t.customer_id order by t.transaction_date) AS lag_transaction,
+       lag(t.transaction_date) OVER (PARTITION BY t.customer_id ORDER BY t.transaction_date) AS lag_transaction,
        lead(t.transaction_date) OVER (PARTITION BY c.customer_id ORDER BY t.transaction_date) AS lead_transaction 
     
         
@@ -169,8 +169,8 @@ SELECT distinct
     job_title,
     transaction_tab.lead_transaction - transaction_tab.lag_transaction as max_interval
 FROM transaction_tab
-where (transaction_tab.lead_transaction - transaction_tab.lag_transaction) = 
-(select MAX(transaction_tab.lead_transaction - transaction_tab.lag_transaction) FROM transaction_tab);
+WHERE (transaction_tab.lead_transaction - transaction_tab.lag_transaction) = 
+(SELECT MAX(transaction_tab.lead_transaction - transaction_tab.lag_transaction) FROM transaction_tab);
 
 
 
