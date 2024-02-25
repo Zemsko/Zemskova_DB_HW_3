@@ -77,7 +77,7 @@ GROUP BY t.brand ,c.job_industry_category;
 
 /* 1. Способ, используя group by*/
 
-SELECT c.customer_id, sum(t.list_price), max(t.list_price), min(t.list_price)
+SELECT c.customer_id,count(t.transaction_id) AS transaction_count, sum(t.list_price), max(t.list_price), min(t.list_price)
 FROM "transaction"  AS t
 JOIN customer AS c ON t.customer_id = c.customer_id
 GROUP BY c.customer_id
