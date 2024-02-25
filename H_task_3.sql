@@ -52,11 +52,11 @@ ORDER BY count DESC ;
 отсортировав по месяцам и по сфере деятельности.*/ 
 
 WITH combined_cte as (
- SELECT date_trunc('month', t.transaction_date) as year_and_month, t.standard_cost, c.job_industry_category
+ SELECT date_trunc('month', t.transaction_date) as year_and_month, t.list_price, c.job_industry_category
  FROM "transaction" AS t 
  JOIN customer AS c on t.customer_id = c.customer_id 
 )
-SELECT cte.year_and_month, cte.job_industry_category, sum(cte.standard_cost) from combined_cte cte
+SELECT cte.year_and_month, cte.job_industry_category, sum(cte.list_price) from combined_cte cte
 GROUP BY cte.year_and_month, job_industry_category
 ORDER BY cte.year_and_month, job_industry_category;
 
