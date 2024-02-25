@@ -1,1 +1,3 @@
-https://github.com/Zemsko/Zemskova_DB_HW_3/blob/main/%D0%98%D0%BC%D0%BF%D0%BE%D1%80%D1%82%20%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85.JPG
+![Импорт данных](https://github.com/Zemsko/Zemskova_DB_HW_3/assets/147048091/921988c7-5e03-4252-bffc-17ab52a00383)
+![Импорт_данных_2](https://github.com/Zemsko/Zemskova_DB_HW_3/assets/147048091/1ac425fb-33a5-4409-b8fe-36f48d0ff274)
+![Скрин из DBeaverJPG](https://github.com/Zemsko/Zemskova_DB_HW_3/assets/147048091/d64bbeca-912b-4512-82f9-6052826d1b2f)
