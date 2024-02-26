@@ -99,7 +99,7 @@ JOIN customer AS c ON t.customer_id = c.customer_id;
 Напишите отдельные запросы для минимальной и максимальной суммы.*/
 
 /*Запрос для  максимальной суммы транзакций*/
-CREATE VIEW t_tbl as (
+CREATE VIEW tbl as (
 	
 SELECT  c.customer_id, c.first_name, c.last_name, count(t.transaction_id) AS transaction_count ,sum(list_price) as sum
 	FROM "transaction"  AS t
@@ -107,22 +107,16 @@ SELECT  c.customer_id, c.first_name, c.last_name, count(t.transaction_id) AS tra
 	GROUP BY c.customer_id, c.first_name,c.last_name);
 
 SELECT  first_name, last_name, sum
-FROM t_tbl t
-WHERE sum = (SELECT MAX(sum) FROM t_tbl);
+FROM tbl t
+WHERE sum = (SELECT MAX(sum) FROM tbl);
 
 
 /*Запрос для  минимальной суммы транзакций*/
-CREATE VIEW s_tbl as (
-SELECT  c.customer_id, c.first_name, c.last_name, count(t.transaction_id) AS transaction_count ,sum(list_price) as sum
-	FROM "transaction"  AS t
-	JOIN customer AS c ON t.customer_id = c.customer_id
-	GROUP BY c.customer_id, c.first_name,c.last_name);
+
 
 SELECT  first_name, last_name, sum
-FROM s_tbl t
-WHERE sum = (SELECT MIN(sum) FROM s_tbl);
-
-
+FROM tbl t
+WHERE sum = (SELECT MIN(sum) FROM tbl);
 
 
 /*6.Вывести только самые первые транзакции клиентов. 
